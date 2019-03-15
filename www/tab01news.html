@@ -48,7 +48,9 @@
         var newsSearch = document.getElementById("selectpicker");
         var newsSearchText;
         var url;
-
+        
+        //Cria CARDS com os dados do JSON
+        //Referência: https://getbootstrap.com/docs/4.3/components/card/
         function createNewsCards(nData) {
 
             for (i in nData.articles) {
@@ -82,13 +84,14 @@
 
             } //for
             
-            <!-- remove imagens quebradas, deixa o card sem imagem -->
+            // remove imagens quebradas, deixa o card sem imagem
             document.querySelectorAll('img').forEach(function(img){
   	             img.onerror = function(){ this.style.display='none'; };
             });
           
         } //createNewsCards
 
+        //Busca os dados da API (Serviço REST/JSON - AJAX)
         function reloadPage() {
 
             newsSearch = document.getElementById("selectpicker");
