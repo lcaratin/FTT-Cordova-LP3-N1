@@ -1,0 +1,460 @@
+<!DOCUMENT HTML>
+<HTML>
+
+<HEAD>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- A biblioteca bundle já contem os arquivos JS do Bootstrap, Popper, e jQuery.
+    <script src="js/bootstrap.bundle.js"></script>-->
+    <title>FTT EC LP2 N1!!</title>
+    <LINK REL="stylesheet" HREF="css/bootstrap.css" />
+    <STYLE>
+        .center-txt {
+            text-align: center;
+            color: black;
+            width: 90px;
+            padding: 4px;
+            margin:0;
+            border:0;
+        }
+        .button-selected {
+            background-color: #343a40;
+            color: white;
+            border-radius:5%;
+        }       
+        .width-button-bar {
+            height: 100px;
+            padding-top: 10px;
+        }
+        .icon-font {
+            font-size: 40px;   
+        }
+        main {
+            padding-top: 56px;
+            padding-bottom: 10px;
+        }
+    </STYLE>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+
+    <SCRIPT>
+        //variáveis globais
+        var todoData; //Dados do TODO em JSON
+        var todoTable; //Acesso a tablela em HTML (tab tbody)
+        
+        //Busca item a item o maior número de Id e retorna somando um
+        function getMaxTaskId() {
+            var maxId = 0;
+            
+            for(taskId in todoData){
+                if (maxId < todoData[taskId].taskId)
+                    maxId = todoData[taskId].taskId;
+            } //for
+            
+            return maxId+1;
+        } //getMaxId
+        
+        function getTaskData(taskId) {
+            
+            for(counter in todoData){
+                if(todoData[counter].taskId == taskId)
+                    return todoData[counter];
+            }
+            
+            return null;
+        
+        } //getTaskData
+        
+        function editTask(taskTag) {
+            
+            taskTag.style.backgroundColor = 'lightblue';
+            
+            let tagTdTaskId = parseInt(taskTag.cells[0].innerHTML);
+            
+            let taskData = getTaskData(tagTdTaskId);
+            
+            console.log(tagTdTaskId);
+            
+            inputTaskId.value = tagTdTaskId;
+            inputTask.value = taskData.task;
+            inputTaskDate.value = taskData.taskDate;
+             window.todoForm.inputTaskStatus.value = taskData.taskStatus;
+        
+        } //editTask 
+        
+        
+        function deleteSelectedTask(taskId) {
+            
+        }
+        
+        //Append na lista (matrix) um novo JSON com uma tarefa nova
+        function saveTask() {
+            
+            //Cria JSON com os dados a serem salvos
+            let newTask = {
+                //"taskId" : inputTaskId.value,
+                "taskId" : getMaxTaskId(), //Pega um novo número de ID
+                "task" : inputTask.value, //Busca texto do formulário...
+                "taskDate" : inputTaskDate.value,
+                "taskStatus": Array.from(document.getElementsByName("inputTaskStatus")).find(r => r.checked).value,  //Busca item selecinado no radio button
+                "taskCreated" : new Date().toLocaleDateString()
+            }
+            
+            todoData.push(newTask); //Adiciona novo JSON a lista (array)
+            
+            //Salva nova versão da lista (matriz) no local storage
+            //Transforma o JSON em strig para armazenamento
+            window.localStorage.setItem('todoData', JSON.stringify(todoData));
+            
+            //Redesenha a tabela na página
+            tableRender();
+            
+        } //saveTask
+        
+    function loadData() {
+        
+        //Busca no local storage pelo item "todoData"
+        var localTodoData = window.localStorage.getItem("todoData");
+        
+        //Se há dados no local storage carrega na variável global todoData como JSON
+        //Se "todoData" é fazio (null) cria uma lista de teste
+        if (localTodoData) {
+            
+            //converte o string armazenado em JSON e atribui a variável global todoData
+            todoData = JSON.parse(localTodoData);
+        
+        } else {
+        
+            //Se o local storage estiver vazio, inicia uma lista de teste...
+            //Só vai rodar na primeira vez que a sessão foi iniciada...
+            todoData = 
+            [{
+                "taskId": 25,
+                "task": "Tarefa 25",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 1,
+                "task": "Tarefa 1",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 2,
+                "task": "Tarefa 2",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 3,
+                "task": "Tarefa 3",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 4,
+                "task": "Tarefa 4",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 5,
+                "task": "Tarefa 5",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 6,
+                "task": "Tarefa 6",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 7,
+                "task": "Tarefa 7",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 8,
+                "task": "Tarefa 8",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 9,
+                "task": "Tarefa 9",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 10,
+                "task": "Tarefa 10",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 11,
+                "task": "Tarefa 11",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 12,
+                "task": "Tarefa 12",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 13,
+                "task": "Tarefa 13",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 14,
+                "task": "Tarefa 14",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 15,
+                "task": "Tarefa 15",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 16,
+                "task": "Tarefa 16",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 17,
+                "task": "Tarefa 17",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 18,
+                "task": "Tarefa 18",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 22,
+                "task": "Tarefa 22",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            },
+            {
+                "taskId": 20,
+                "task": "Tarefa 20",
+                "taskDate": "10/12/2015",
+                "taskStatus": "Pendente",
+                "taskCreated":"01/02/2015"
+            }];
+
+        } //if
+        
+        //Inclui os registros na tabela HTML para listar os dados do JSON todoData
+        tableRender();
+        
+    } //loadData
+        
+        
+    
+    function tableRender() {
+        
+        //Busca no DOM a tag tbody
+        let dtable = document.getElementById("todoTableBody");
+        
+        //Limpa o conteúdo da taba tbody
+        dtable.innerHTML = "";
+        
+        //Cria as tablela, TR (linhas), TD (colunas)
+        todoData.forEach(function(record) {            
+            
+            let trTag = document.createElement("tr");
+            let att = document.createAttribute("scope");
+            att.value = "row";
+            trTag.setAttributeNode(att);
+            
+            let attOnClick = document.createAttribute("onclick");
+            attOnClick.value = "editTask(this);";
+            trTag.setAttributeNode(attOnClick);
+                        
+            let idTdTag = document.createElement("td");
+            idTdTag.innerHTML = record.taskId;
+            
+            let taskTdTag = document.createElement("td");
+            taskTdTag.innerHTML = record.task;
+            
+            let dateTdTag = document.createElement("td");
+            dateTdTag.innerHTML = record.taskDate;
+            
+            let statusTdTag = document.createElement("td");
+            statusTdTag.innerHTML = record.taskStatus;
+            
+            let createdTdTag = document.createElement("td");
+            createdTdTag.innerHTML = record.taskCreated;
+            
+            trTag.appendChild(idTdTag);
+            trTag.appendChild(taskTdTag);
+            trTag.appendChild(dateTdTag);
+            trTag.appendChild(statusTdTag);
+            trTag.appendChild(createdTdTag);
+            
+            dtable.appendChild(trTag);
+            //console.log(record.id);
+        });
+            
+
+    } //tableRender
+        
+    </SCRIPT>
+</HEAD>
+
+<BODY lang="pt-br" onload="loadData();">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a class="navbar-brand" href="#">&#x1F981; FTT EC LP2 N1!!!</a>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <div class="navbar-nav float-right text-right pr-3">
+                <a class="nav-item nav-link" href="index.html">Splash</a>
+                <a class="nav-item nav-link" href="http://www.fundacaosalvadorarena.org.br/" target="newpage">CEFSA</a>
+                <a class="nav-item nav-link" href="about.html">Sobre</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container" id="todo">
+        <!-- <button class="btn" style="float:right" onclick="taskForm();">Nova tarefa</button> -->
+
+        <hr>
+
+        <div class="modal fade" id="modalTaskForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Tarefa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <form id="todoForm" action="#" method="post">
+
+                            <div class="md-form mb-5">
+                                <i class="fas fa-envelope prefix grey-text"></i>
+                                <input type="number" id="inputTaskId" class="form-control validate required" readonly>
+                                <label data-error="wrong" data-success="right" for="defaultForm-email">ID</label>
+                            </div>
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="text" id="inputTask" class="form-control validate required">
+                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Tarefa</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                <input type="date" id="inputTaskDate" class="form-control validate required">
+                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Data</label>
+                            </div>
+
+                            <div class="md-form mb-4">
+                                <i class="fas fa-lock prefix grey-text"></i>
+
+
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-info active">
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus1" autocomplete="off" value="Pendente" checked> Pendente
+                                    </label>
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus2" autocomplete="off" value="Em andamento"> Em andamento
+                                    </label>
+                                    <label class="btn btn-success">
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus3" autocomplete="off" value="Finalizado"> Finalizado
+                                    </label>
+                                    <label class="btn btn-dark">
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus4" autocomplete="off" value="Cancelado"> Cancelado
+                                    </label>
+                                </div>
+
+                                <label data-error="wrong" data-success="right" for="defaultForm-pass">Status</label>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class="btn btn-default" onclick="saveTask();">Salvar</button>
+                        <button class="btn btn-default" onclick="#">Apagar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalTaskForm">Nova Tarefa</a>
+        </div>
+
+        <table id="todoTable" class="table">
+            <thead>
+                <tr>
+                    <th data-field="taskId" scope="col">ID</th>
+                    <th data-field="task" scope="col">Task</th>
+                    <th data-field="taskDate" scope="col">Date</th>
+                    <th data-field="taskStatus" scope="col">Status</th>
+                    <th data-field="taskCreated" scope="col">Criada</th>
+                </tr>
+            </thead>
+            <tbody id="todoTableBody">
+            </tbody>
+        </table>
+
+    </main>
+
+
+    <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
+        <div class="row w-100">
+            <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;&#xFE0E;</span></b>
+            </div>
+            <div class="col-sm center-txt  button-selected"><b onclick='window.location="tab03todo.html"'>Todo<br><span class="icon-font">&#x1F4DD;</span></b>
+            </div>
+            <div class="col-sm center-txt"><b onclick='window.location="tab04project.html"'>???<br><span class="icon-font">&#x1F981;</span></b>
+            </div>
+        </div>
+    </nav>
+</BODY>
+
+</HTML>
