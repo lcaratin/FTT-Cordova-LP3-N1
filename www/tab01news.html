@@ -43,7 +43,7 @@
         }
     </STYLE>
     <SCRIPT>
-
+        <!-- Obtenha sua própria chave (key), vou cancelar esta... --> 
         var key = 'a471bfae6bea4870828911cc205e47e9'; //Conseguir uma chave no site da API...
         var newsSearch = document.getElementById("selectpicker");
         var newsSearchText;
@@ -82,7 +82,7 @@
 
             } //for
             
-            
+            <!-- remove imagens quebradas, deixa o card sem imagem -->
             document.querySelectorAll('img').forEach(function(img){
   	             img.onerror = function(){ this.style.display='none'; };
             });

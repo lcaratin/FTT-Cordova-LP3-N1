@@ -80,13 +80,14 @@
             inputTaskId.value = tagTdTaskId;
             inputTask.value = taskData.task;
             inputTaskDate.value = taskData.taskDate;
-             window.todoForm.inputTaskStatus.value = taskData.taskStatus;
-        
+            window.todoForm.inputTaskStatus.value = taskData.taskStatus;
+            //TODO: Finalizar...
+            
         } //editTask 
         
         
         function deleteSelectedTask(taskId) {
-            
+            //TODO: Implementar
         }
         
         //Append na lista (matrix) um novo JSON com uma tarefa nova
@@ -339,7 +340,7 @@
 </HEAD>
 
 <BODY lang="pt-br" onload="loadData();">
-
+    <!-- Navegador superior -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -356,6 +357,7 @@
         </div>
     </nav>
 
+    <!-- यहां जादू होता है! -->
     <main class="container" id="todo">
         <!-- <button class="btn" style="float:right" onclick="taskForm();">Nova tarefa</button> -->
 
@@ -429,10 +431,10 @@
             <thead>
                 <tr>
                     <th data-field="taskId" scope="col">ID</th>
-                    <th data-field="task" scope="col">Task</th>
-                    <th data-field="taskDate" scope="col">Date</th>
+                    <th data-field="task" scope="col">Tarefa</th>
+                    <th data-field="taskDate" scope="col">Data</th>
                     <th data-field="taskStatus" scope="col">Status</th>
-                    <th data-field="taskCreated" scope="col">Criada</th>
+                    <th data-field="taskCreated" scope="col">Criação</th>
                 </tr>
             </thead>
             <tbody id="todoTableBody">
@@ -441,7 +443,7 @@
 
     </main>
 
-
+    <!-- Navegador inferior -->
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
         <div class="row w-100">
             <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
