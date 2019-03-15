@@ -1,4 +1,4 @@
-<!DOCUMENT HTML>
+<!DOCTYPE HTML>
 <HTML>
 
 <HEAD>
@@ -19,26 +19,48 @@
         .button-selected {
             background-color: #343a40;
             color: white;
-            border-radius:5%;
+            border-radius: 15px;
         }       
         .width-button-bar {
-            height: 100px;
-            padding-top: 10px;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 0;
+            margin-left: 0;
+            
+        }
+        .bottom-button-bar {
+            margin:0;
+            padding:0;
+            border:0;
+            width: 100%;
         }
         .icon-font {
             font-size: 40px;   
         }
+        .conteiner-margin {
+            margin: 0;
+        }
         main {
             padding-top: 56px;
             padding-bottom: 10px;
+            margin: 0;
+        }
+        .rounded-button {
+            float:right;
+            background-color: #000099;
+            border-radius: 100px;
+            color: white;
+        }
+        .table-size {
+            width: 95%;
         }
     </STYLE>
 
+    <!-- carga de scripts do Bootstrap, JQuery, Popper -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-
 
     <SCRIPT>
         //variáveis globais
@@ -81,13 +103,14 @@
             inputTaskId.value = tagTdTaskId;
             inputTask.value = taskData.task;
             inputTaskDate.value = taskData.taskDate;
-             window.todoForm.inputTaskStatus.value = taskData.taskStatus;
-        
+            window.todoForm.inputTaskStatus.value = taskData.taskStatus;
+            //TODO: Finalizar...
+            
         } //editTask 
         
         
         function deleteSelectedTask(taskId) {
-            
+            //TODO: Implementar
         }
         
         //Append na lista (matrix) um novo JSON com uma tarefa nova
@@ -340,7 +363,7 @@
 </HEAD>
 
 <BODY lang="pt-br" onload="loadData();">
-
+    <!-- Navegador superior -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -357,59 +380,56 @@
         </div>
     </nav>
 
-    <main class="container" id="todo">
-        <!-- <button class="btn" style="float:right" onclick="taskForm();">Nova tarefa</button> -->
+    <!-- यहां जादू होता है! -->
+    <main class="container conteiner-margin" id="todo">
 
         <hr>
 
         <div class="modal fade" id="modalTaskForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="width:90%;">
                     <div class="modal-header text-center">
                         <h4 class="modal-title w-100 font-weight-bold">Tarefa</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        <hr>
+                        
                     </div>
                     <div class="modal-body mx-3">
                         <form id="todoForm" action="#" method="post">
 
                             <div class="md-form mb-5">
-                                <i class="fas fa-envelope prefix grey-text"></i>
                                 <input type="number" id="inputTaskId" class="form-control validate required" readonly>
                                 <label data-error="wrong" data-success="right" for="defaultForm-email">ID</label>
                             </div>
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
                                 <input type="text" id="inputTask" class="form-control validate required">
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Tarefa</label>
                             </div>
 
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
                                 <input type="date" id="inputTaskDate" class="form-control validate required">
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Data</label>
                             </div>
 
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
 
-
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-info active">
-                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus1" autocomplete="off" value="Pendente" checked> Pendente
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus1" autocomplete="off" value="Pendente" checked>Pendente
                                     </label>
                                     <label class="btn btn-primary">
-                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus2" autocomplete="off" value="Em andamento"> Em andamento
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus2" autocomplete="off" value="Em andamento">Em andamento
                                     </label>
                                     <label class="btn btn-success">
-                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus3" autocomplete="off" value="Finalizado"> Finalizado
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus3" autocomplete="off" value="Finalizado">Finalizado
                                     </label>
                                     <label class="btn btn-dark">
-                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus4" autocomplete="off" value="Cancelado"> Cancelado
+                                        <input type="radio" name="inputTaskStatus" id="inputTaskStatus4" autocomplete="off" value="Cancelado">Cancelado
                                     </label>
                                 </div>
-
+<br>
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Status</label>
                             </div>
                         </form>
@@ -425,29 +445,30 @@
         <div class="text-center">
             <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalTaskForm">Nova Tarefa</a>
         </div>
-
-        <table id="todoTable" class="table">
+        <spam class="btn-floating btn-lg purple-gradient rounded-button">+</spam>
+        <table id="todoTable" class="table table-size">
             <thead>
                 <tr>
                     <th data-field="taskId" scope="col">ID</th>
-                    <th data-field="task" scope="col">Task</th>
-                    <th data-field="taskDate" scope="col">Date</th>
+                    <th data-field="task" scope="col">Tarefa</th>
+                    <th data-field="taskDate" scope="col">Data</th>
                     <th data-field="taskStatus" scope="col">Status</th>
-                    <th data-field="taskCreated" scope="col">Criada</th>
+                    <th data-field="taskCreated" scope="col">Criação</th>
                 </tr>
             </thead>
+            <!-- Os dados são carregados no tbody -->
             <tbody id="todoTableBody">
             </tbody>
         </table>
 
     </main>
 
-
+    <!-- Navegador inferior -->
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
-        <div class="row w-100">
+        <div class="row w-100 bottom-button-bar">
             <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
             </div>
-            <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;&#xFE0E;</span></b>
+            <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;</span></b>
             </div>
             <div class="col-sm center-txt  button-selected"><b onclick='window.location="tab03todo.html"'>Todo<br><span class="icon-font">&#x1F4DD;</span></b>
             </div>

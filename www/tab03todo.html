@@ -22,15 +22,38 @@
             border-radius: 15px;
         }       
         .width-button-bar {
-            height: 100px;
-            padding-top: 10px;
+            text-align: center;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin-right: 0;
+            margin-left: 0;
+            
+        }
+        .bottom-button-bar {
+            margin:0;
+            padding:0;
+            border:0;
+            width: 100%;
         }
         .icon-font {
             font-size: 40px;   
         }
+        .conteiner-margin {
+            margin: 0;
+        }
         main {
             padding-top: 56px;
             padding-bottom: 10px;
+            margin: 0;
+        }
+        .rounded-button {
+            float:right;
+            background-color: #000099;
+            border-radius: 100px;
+            color: white;
+        }
+        .table-size {
+            width: 95%;
         }
     </STYLE>
 
@@ -358,45 +381,41 @@
     </nav>
 
     <!-- यहां जादू होता है! -->
-    <main class="container" id="todo">
-        <!-- <button class="btn" style="float:right" onclick="taskForm();">Nova tarefa</button> -->
+    <main class="container conteiner-margin" id="todo">
 
         <hr>
 
         <div class="modal fade" id="modalTaskForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="width:90%;">
                     <div class="modal-header text-center">
                         <h4 class="modal-title w-100 font-weight-bold">Tarefa</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
+                        <hr>
+                        
                     </div>
                     <div class="modal-body mx-3">
                         <form id="todoForm" action="#" method="post">
 
                             <div class="md-form mb-5">
-                                <i class="fas fa-envelope prefix grey-text"></i>
                                 <input type="number" id="inputTaskId" class="form-control validate required" readonly>
                                 <label data-error="wrong" data-success="right" for="defaultForm-email">ID</label>
                             </div>
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
                                 <input type="text" id="inputTask" class="form-control validate required">
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Tarefa</label>
                             </div>
 
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
                                 <input type="date" id="inputTaskDate" class="form-control validate required">
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Data</label>
                             </div>
 
                             <div class="md-form mb-4">
-                                <i class="fas fa-lock prefix grey-text"></i>
 
-
-                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-info active">
                                         <input type="radio" name="inputTaskStatus" id="inputTaskStatus1" autocomplete="off" value="Pendente" checked>Pendente
                                     </label>
@@ -410,7 +429,7 @@
                                         <input type="radio" name="inputTaskStatus" id="inputTaskStatus4" autocomplete="off" value="Cancelado">Cancelado
                                     </label>
                                 </div>
-
+<br>
                                 <label data-error="wrong" data-success="right" for="defaultForm-pass">Status</label>
                             </div>
                         </form>
@@ -426,8 +445,8 @@
         <div class="text-center">
             <a href="" class="btn btn-default btn-rounded mb-4" data-toggle="modal" data-target="#modalTaskForm">Nova Tarefa</a>
         </div>
-
-        <table id="todoTable" class="table">
+        <spam class="btn-floating btn-lg purple-gradient rounded-button">+</spam>
+        <table id="todoTable" class="table table-size">
             <thead>
                 <tr>
                     <th data-field="taskId" scope="col">ID</th>
@@ -446,7 +465,7 @@
 
     <!-- Navegador inferior -->
     <nav class="navbar fixed-bottom navbar-light bg-light width-button-bar">
-        <div class="row w-100">
+        <div class="row w-100 bottom-button-bar">
             <div class="col-sm center-txt"><b onclick='window.location="tab01news.html"'>News<br><span class="icon-font">&#x1f4f0;</span></b>
             </div>
             <div class="col-sm center-txt"><b onclick='window.location="tab02map.html"'>Map<br><span class="icon-font">&#x1f4cc;</span></b>
