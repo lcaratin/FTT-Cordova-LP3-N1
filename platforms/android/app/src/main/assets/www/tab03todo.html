@@ -155,152 +155,35 @@
             //Só vai rodar na primeira vez que a sessão foi iniciada...
             todoData = 
             [{
-                "taskId": 25,
-                "task": "Tarefa 25",
+                "taskId": 10,
+                "task": "Estudar CSS3 no W3CSchools",
                 "taskDate": "10/12/2015",
                 "taskStatus": "Pendente",
                 "taskCreated":"01/02/2015"
             },
             {
                 "taskId": 1,
-                "task": "Tarefa 1",
+                "task": "Estudar HTML5 no MDN",
                 "taskDate": "10/12/2015",
                 "taskStatus": "Pendente",
                 "taskCreated":"01/02/2015"
             },
             {
                 "taskId": 2,
-                "task": "Tarefa 2",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 3,
-                "task": "Tarefa 3",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 4,
-                "task": "Tarefa 4",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 5,
-                "task": "Tarefa 5",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 6,
-                "task": "Tarefa 6",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 7,
-                "task": "Tarefa 7",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 8,
-                "task": "Tarefa 8",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 9,
-                "task": "Tarefa 9",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 10,
-                "task": "Tarefa 10",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 11,
-                "task": "Tarefa 11",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 12,
-                "task": "Tarefa 12",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 13,
-                "task": "Tarefa 13",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 14,
-                "task": "Tarefa 14",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 15,
-                "task": "Tarefa 15",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 16,
-                "task": "Tarefa 16",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 17,
-                "task": "Tarefa 17",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 18,
-                "task": "Tarefa 18",
-                "taskDate": "10/12/2015",
-                "taskStatus": "Pendente",
-                "taskCreated":"01/02/2015"
-            },
-            {
-                "taskId": 22,
-                "task": "Tarefa 22",
+                "task": "Estudar JavaScript o resto da vida!!",
                 "taskDate": "10/12/2015",
                 "taskStatus": "Pendente",
                 "taskCreated":"01/02/2015"
             },
             {
                 "taskId": 20,
-                "task": "Tarefa 20",
+                "task": "Estudar Bootstrap 4",
                 "taskDate": "10/12/2015",
                 "taskStatus": "Pendente",
                 "taskCreated":"01/02/2015"
             }];
+            
+            
 
         } //if
         
@@ -331,11 +214,24 @@
             attOnClick.value = "editTask(this);";
             trTag.setAttributeNode(attOnClick);
                         
+            
+            let trTag2 = document.createElement("tr");
+            att = document.createAttribute("scope");
+            att.value = "row";
+            trTag2.setAttributeNode(att);
+            
             let idTdTag = document.createElement("td");
             idTdTag.innerHTML = record.taskId;
+            att = document.createAttribute("rowspan");
+            att.value = "2";
+            idTdTag.setAttributeNode(att);
             
             let taskTdTag = document.createElement("td");
             taskTdTag.innerHTML = record.task;
+            let attTd = document.createAttribute("colspan");
+            attTd.value = "3";
+            taskTdTag.setAttributeNode(attTd);
+
             
             let dateTdTag = document.createElement("td");
             dateTdTag.innerHTML = record.taskDate;
@@ -347,13 +243,17 @@
             createdTdTag.innerHTML = record.taskCreated;
             
             trTag.appendChild(idTdTag);
-            trTag.appendChild(taskTdTag);
+            //trTag.appendChild(taskTdTag);
             trTag.appendChild(dateTdTag);
             trTag.appendChild(statusTdTag);
             trTag.appendChild(createdTdTag);
             
+            trTag2.appendChild(taskTdTag);
+            
             dtable.appendChild(trTag);
+            dtable.appendChild(trTag2);
             //console.log(record.id);
+            
         });
             
 
@@ -450,7 +350,7 @@
             <thead>
                 <tr>
                     <th data-field="taskId" scope="col">ID</th>
-                    <th data-field="task" scope="col">Tarefa</th>
+                    <!-- <th data-field="task" scope="col">Tarefa</th> -->
                     <th data-field="taskDate" scope="col">Data</th>
                     <th data-field="taskStatus" scope="col">Status</th>
                     <th data-field="taskCreated" scope="col">Criação</th>
