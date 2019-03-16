@@ -43,7 +43,7 @@
         }
         main {
             padding-top: 56px;
-            padding-bottom: 10px;
+            padding-bottom: 100px;
             margin: 0;
         }
         .rounded-button {
@@ -54,6 +54,10 @@
         }
         .table-size {
             width: 95%;
+        }
+        .taskText {
+            color: darkslategrey;
+            font-weight: bold;
         }
     </STYLE>
 
@@ -228,9 +232,16 @@
             
             let taskTdTag = document.createElement("td");
             taskTdTag.innerHTML = record.task;
+            
             let attTd = document.createAttribute("colspan");
             attTd.value = "3";
             taskTdTag.setAttributeNode(attTd);
+            
+            attTd = document.createAttribute("class");
+            attTd.value = "taskText";
+            taskTdTag.setAttributeNode(attTd);
+            
+            
 
             
             let dateTdTag = document.createElement("td");
@@ -315,7 +326,7 @@
 
                             <div class="md-form mb-4">
 
-                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                                <div class="btn-group btn-group-sm btn-group-toggle btn-group-vertical" data-toggle="buttons">
                                     <label class="btn btn-info active">
                                         <input type="radio" name="inputTaskStatus" id="inputTaskStatus1" autocomplete="off" value="Pendente" checked>Pendente
                                     </label>
