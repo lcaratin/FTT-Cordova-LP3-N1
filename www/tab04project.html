@@ -279,7 +279,7 @@
             heroes.forEach((hero) => {
                 debugger;
                 html += `
-                    <div class="card" onclick="window.openHeroDesc('${hero.name}','${hero.description.replace(/'/g, '&quot;')}')"> 
+                    <div class="card" onclick="window.openHeroDesc('${hero.name}','${hero.description.replace(/'/g, '&quot;').replace(/"/g, '&quot;')}')"> 
                         <div style="width: 100%">
                             <img src="${hero.thumbnail.path}.${hero.thumbnail.extension}" class="hero_image"/>
                         </div>
